@@ -1,6 +1,7 @@
 package com.design.platform.resourceplatform.services.impl;
 
 import com.design.platform.resourceplatform.entities.File;
+import com.design.platform.resourceplatform.entities.Resource;
 import com.design.platform.resourceplatform.mappers.ResourceMapperKt;
 import com.design.platform.resourceplatform.repositories.FileRepository;
 import com.design.platform.resourceplatform.repositories.ResourceRepository;
@@ -12,6 +13,12 @@ import com.design.platform.resourceplatform.utils.PageHolder;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDateTime;
 
 @Service
 public class FileServiceImpl implements FileService {
@@ -81,10 +88,16 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public File AddNewFile(FileDefiner definer, MultipartFile fileRaw) {
-        File file = definer.ToFile(userService);
-        file.path = fileRawService.AddFile(fileRaw);
-        return repository.save(file);
+    public File UploadFile(FileDefiner definer, MultipartFile fileRaw) {
+//        File file = definer.ToFile(userService);
+//        file.path = fileRawService.AddFile(fileRaw);
+        try {
+            SaveFile(definer.author, definer.name, fileRaw);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        return repository.save(file);
+        return null;
     }
 
     @Override
@@ -92,5 +105,41 @@ public class FileServiceImpl implements FileService {
         File file = GetFile(id);
         fileRawService.RemoveFile(file.path);
         repository.delete(file);
+    }
+
+    private Resource GetFile(String path) {
+        return null;
+    }
+
+    private String SaveFile(int author, String name, MultipartFile file) throws IOException {
+        if (file.isEmpty()) return null;
+        if (file.getOriginalFilename() == null) return null;
+
+        // choose user upload folder
+        Path folder = Paths.get(
+                "uploads",
+                String.valueOf(author),
+                String.valueOf(LocalDateTime.now().getYear()),
+                String.valueOf(LocalDateTime.now().getMonth()));
+        if (!Files.exists(folder)) Files.createDirectories(folder);
+
+        // (optional) rename file
+        String dataName = file.getOriginalFilename();
+        if (name != null) {
+            int index = dataName.lastIndexOf(".");
+            String extension = dataName.substring(index);
+            dataName = name + extension;
+        }
+
+        // save file in folder
+        Path data = Paths.get(folder.toString(), dataName);
+        file.transferTo(data);
+
+        // return file tag
+        return data.toString();
+    }
+
+    private String RemoveFile(String path) {
+        return null;
     }
 }

@@ -5,7 +5,6 @@ import com.design.platform.resourceplatform.services.UserService;
 
 public class FileDefiner {
     public String name = null;
-
     public int author;
 
     public File ToFile(UserService userService){

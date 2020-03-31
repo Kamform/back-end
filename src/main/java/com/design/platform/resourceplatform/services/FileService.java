@@ -1,6 +1,7 @@
 package com.design.platform.resourceplatform.services;
 
 import com.design.platform.resourceplatform.entities.File;
+import com.design.platform.resourceplatform.entities.Resource;
 import com.design.platform.resourceplatform.repositories.FileRepository;
 import com.design.platform.resourceplatform.transfer.*;
 import com.design.platform.resourceplatform.utils.PageHolder;
@@ -31,7 +32,7 @@ public interface FileService {
 
     File UpdateFile(FileRecorder recorder, MultipartFile file);
 
-    File AddNewFile(FileDefiner definer, MultipartFile file);
+    File UploadFile(FileDefiner definer, MultipartFile file);
 
     void DestroyFile(int id);
 }

@@ -5,7 +5,6 @@ import com.design.platform.resourceplatform.services.FileRawService;
 import com.design.platform.resourceplatform.services.FileService;
 import com.design.platform.resourceplatform.transfer.FileBooth;
 import com.design.platform.resourceplatform.transfer.FileDefiner;
-import com.design.platform.resourceplatform.transfer.FileRecorder;
 import com.design.platform.resourceplatform.transfer.ResourceBooth;
 import com.design.platform.resourceplatform.utils.PageHolder;
 import com.design.platform.resourceplatform.utils.PageParam;
@@ -21,7 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 //      GET /{id}               单个文件信息 开放权限
 //      GET /{id}/contained-by 文件包含于   开放权限
 //      GET /{id}/download      下载文件     开放权限
-//      POST /                  更新文件     主人权限
 //      PUT /                   上传新文件   用户权限
 //      DELETE /                删除文件     主人权限
 
@@ -67,14 +65,9 @@ public class FileController {
         return resource;
     }
 
-    @PostMapping
-    public void UpdateFile(@RequestPart FileRecorder recorder, @RequestPart MultipartFile file) {
-        service.UpdateFile(recorder, file);
-    }
-
     @PutMapping
-    public void CreateFile(@RequestPart FileDefiner definer, @RequestPart MultipartFile file) {
-        service.AddNewFile(definer, file);
+    public void UploadFile(@RequestPart FileDefiner definer, @RequestPart MultipartFile file) {
+        service.UploadFile(definer, file);
     }
 
     @DeleteMapping
