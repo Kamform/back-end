@@ -37,12 +37,12 @@ public class CategoryController {
 
     @GetMapping
     public PageHolder<CategoryBooth> GetCategoryList(PageParam param) {
-        return service.GetCategoryBoothList(PageUtilsKt.auto(param));
+        return service.GetCategoryBoothList(PageUtilsKt.getAuto(param));
     }
 
     @GetMapping("/{id}/resources")
     public PageHolder<ResourceBooth> GetResourceListByCategory(@PathVariable int id, PageParam param) {
-        return service.GetCategoryResourceBoothList(id, PageUtilsKt.auto(param));
+        return service.GetCategoryResourceBoothList(id, PageUtilsKt.getAuto(param));
     }
 
     @GetMapping("/{id}")

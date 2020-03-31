@@ -19,7 +19,11 @@ public interface ResourceRepository extends JpaRepository<Resource, Integer>, Jp
 
     Page<Resource> findAllByAuthor(User author, Pageable pageable);
 
+    Page<Resource> findAllByAuthorId(int author, Pageable pageable);
+
     Page<Resource> findAllByFavored(User favoriteBy, Pageable pageable);
+
+    Page<Resource> findAllByFavoredId(int id, Pageable pageable);
 
     Page<Resource> findAllByFiles(File file, Pageable pageable);
 }

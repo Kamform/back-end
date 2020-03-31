@@ -5,7 +5,6 @@ import com.design.platform.resourceplatform.repositories.AccountRepository;
 import com.design.platform.resourceplatform.services.AccountService;
 import com.design.platform.resourceplatform.services.AdminService;
 import com.design.platform.resourceplatform.transfer.AdminBooth;
-import com.design.platform.resourceplatform.transfer.AdminDefiner;
 import com.design.platform.resourceplatform.transfer.AdminRecorder;
 import com.design.platform.resourceplatform.utils.PageHolder;
 import com.design.platform.resourceplatform.utils.PageHolderKt;
@@ -28,7 +27,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public PageHolder<AdminBooth> GetAdminBoothList(PageRequest request) {
-        return PageHolderKt.auto(repository.findAllByAdminIsTrue(request).map(this::GetAdminBooth));
+        return PageHolderKt.getAuto(repository.findAllByAdminIsTrue(request).map(this::GetAdminBooth));
     }
 
     @Override

@@ -39,32 +39,32 @@ public class UserController {
 
     @GetMapping
     public PageHolder<UserBooth> GetUserList(PageParam param) {
-        return service.GetUserBoothList(PageUtilsKt.auto(param));
+        return service.GetUserBoothList(PageUtilsKt.getAuto(param));
     }
 
     @GetMapping("/{id}/followers")
     public PageHolder<UserBooth> GetUserFollowersList(@PathVariable int id, PageParam param) {
-        return service.GetUserFollowersBoothList(id, PageUtilsKt.auto(param));
+        return service.GetUserFollowersBoothList(id, PageUtilsKt.getAuto(param));
     }
 
     @GetMapping("/{id}/followed")
     public PageHolder<UserBooth> GetUserFollowedList(@PathVariable int id, PageParam param) {
-        return service.GetUserFollowedBoothList(id, PageUtilsKt.auto(param));
+        return service.GetUserFollowedBoothList(id, PageUtilsKt.getAuto(param));
     }
 
     @GetMapping("/{id}/published")
     public PageHolder<ResourceBooth> GetUserPublished(@PathVariable int id, PageParam param) {
-        return service.GetUserPublishedBoothList(id, PageUtilsKt.auto(param));
+        return service.GetUserPublishedBoothList(id, PageUtilsKt.getAuto(param));
     }
 
     @GetMapping("/{id}/favorites")
     public PageHolder<ResourceBooth> GetUserFavorites(@PathVariable int id, PageParam param) {
-        return service.GetUserFavoritesBoothList(id, PageUtilsKt.auto(param));
+        return service.GetUserFavoritesBoothList(id, PageUtilsKt.getAuto(param));
     }
 
     @GetMapping("/{id}/files")
     public PageHolder<FileBooth> GetUserFiles(@PathVariable int id, PageParam param) {
-        return service.GetUserFilesBoothList(id, PageUtilsKt.auto(param));
+        return service.GetUserFilesBoothList(id, PageUtilsKt.getAuto(param));
     }
 
     @GetMapping("/{id}")

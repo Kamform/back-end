@@ -4,7 +4,6 @@ package com.design.platform.resourceplatform.interfaces;
 import com.design.platform.resourceplatform.entities.Account;
 import com.design.platform.resourceplatform.services.AdminService;
 import com.design.platform.resourceplatform.transfer.AdminBooth;
-import com.design.platform.resourceplatform.transfer.AdminDefiner;
 import com.design.platform.resourceplatform.transfer.AdminRecorder;
 import com.design.platform.resourceplatform.utils.PageHolder;
 import com.design.platform.resourceplatform.utils.PageParam;
@@ -26,7 +25,7 @@ public class AdminController {
 
     @GetMapping
     public PageHolder<AdminBooth> GetList(PageParam param) {
-        return service.GetAdminBoothList(PageUtilsKt.auto(param));
+        return service.GetAdminBoothList(PageUtilsKt.getAuto(param));
     }
 
     @GetMapping("/{id}")

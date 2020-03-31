@@ -147,6 +147,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void FollowUser(UserFollow follow) {
-        GetUser(follow.self).followed.add(GetUser(follow.target));
+        GetUser(follow.self).idols.add(GetUser(follow.target));
     }
 }

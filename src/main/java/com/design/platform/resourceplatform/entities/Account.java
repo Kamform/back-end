@@ -12,7 +12,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-public class Account implements UserDetails {
+public abstract class Account implements UserDetails {
 
     @Id
     @GeneratedValue
@@ -20,9 +20,6 @@ public class Account implements UserDetails {
 
     public String username;
     public String password;
-
-    @Column(name = "is_admin")
-    public boolean admin;
 
     @Column(name = "is_enable")
     public boolean enable;
@@ -41,10 +38,7 @@ public class Account implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (admin)
-            return List.of(new SimpleGrantedAuthority("ADMIN"));
-        else
-            return List.of();
+        return List.of();
     }
 
     @Override

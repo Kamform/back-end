@@ -43,7 +43,7 @@ public class FileController {
 
     @GetMapping
     public PageHolder<FileBooth> GetFileList(PageParam param) {
-        return service.GetFileBoothList(PageUtilsKt.auto(param));
+        return service.GetFileBoothList(PageUtilsKt.getAuto(param));
     }
 
     @GetMapping("/{id}")
@@ -53,7 +53,7 @@ public class FileController {
 
     @GetMapping("/{id}/contained-by")
     public PageHolder<ResourceBooth> GetFileContainedList(@PathVariable int id, PageParam param) {
-        return service.GetFileContainedByBoothList(id, PageUtilsKt.auto(param));
+        return service.GetFileContainedByBoothList(id, PageUtilsKt.getAuto(param));
     }
 
     @GetMapping(value = "/{id}/download", consumes = "*/*")

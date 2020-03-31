@@ -4,28 +4,20 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class User {
+public class User extends Account {
 
-    @Id
-    @GeneratedValue
-    public int id;
-
-    @MapsId
-    @OneToOne(cascade = CascadeType.REMOVE)
-    public Account account;
-
+    public String nickname;
     public String email;
-
     public String phone;
 
     @ManyToMany
-    public List<User> followed;
+    public List<User> idols;
 
-    @ManyToMany(mappedBy = "followed")
-    public List<User> followers;
+    @ManyToMany(mappedBy = "idols")
+    public List<User> fans;
 
     @OneToMany
-    public List<Resource> published;
+    public List<Resource> resources;
 
     @ManyToMany
     public List<Resource> favorites;

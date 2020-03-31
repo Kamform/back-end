@@ -37,17 +37,17 @@ public class ResourceController {
 
     @GetMapping
     public PageHolder<ResourceBooth> GetResourceList(PageParam param) {
-        return service.GetResourceBoothList(PageUtilsKt.auto(param));
+        return service.GetResourceBoothList(PageUtilsKt.getAuto(param));
     }
 
     @GetMapping("/{id}/favorite-by")
     public PageHolder<UserBooth> GetResourceFavoriteByList(@PathVariable int id, PageParam param) {
-        return service.GetResourceFavoriteByBoothList(id, PageUtilsKt.auto(param));
+        return service.GetResourceFavoriteByBoothList(id, PageUtilsKt.getAuto(param));
     }
 
     @GetMapping("/{id}/files")
     public PageHolder<FileBooth> GetResourceFileList(@PathVariable int id, PageParam param) {
-        return service.GetResourceFilesBoothList(id, PageUtilsKt.auto(param));
+        return service.GetResourceFilesBoothList(id, PageUtilsKt.getAuto(param));
     }
 
     @GetMapping("/{id}")

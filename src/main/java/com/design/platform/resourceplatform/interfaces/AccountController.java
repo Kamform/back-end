@@ -34,7 +34,7 @@ public class AccountController {
 
     @GetMapping
     public PageHolder<AccountBooth> GetAccountList(PageParam param) {
-        return service.GetAccountBoothList(PageUtilsKt.auto(param));
+        return service.GetAccountBoothList(PageUtilsKt.getAuto(param));
     }
 
     @GetMapping("/{id}")

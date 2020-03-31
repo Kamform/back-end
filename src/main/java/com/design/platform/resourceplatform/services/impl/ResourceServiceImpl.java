@@ -50,12 +50,12 @@ public class ResourceServiceImpl implements ResourceService {
 
     @Override
     public PageHolder<UserBooth> GetResourceFavoriteByBoothList(int id, PageRequest request) {
-        return PageHolderKt.auto(users.findAllByFavoritesId(id, request).map(UserMapperKt::auto));
+        return PageHolderKt.getAuto(users.findAllByFavoritesId(id, request).map(UserMapperKt::auto));
     }
 
     @Override
     public PageHolder<FileBooth> GetResourceFilesBoothList(int id, PageRequest request) {
-        return PageHolderKt.auto(files.findAllByContainedId(id, request).map(FileBooth::FromFile));
+        return PageHolderKt.getAuto(files.findAllByContainedId(id, request).map(FileBooth::FromFile));
     }
 
     // Methods Get Item

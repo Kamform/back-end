@@ -10,6 +10,7 @@ class PageHolder<T>(page: Page<T>) {
     var size: Int = page.size
 }
 
-fun <T> Page<T>.auto(): PageHolder<T> {
-    return PageHolder(this)
-}
+val <T> Page<T>.auto: PageHolder<T>
+    get() {
+        return PageHolder(this)
+    }

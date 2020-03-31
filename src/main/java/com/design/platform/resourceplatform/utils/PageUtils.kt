@@ -14,13 +14,11 @@ data class OrderParam(
     var direction: Sort.Direction? = Sort.Direction.DESC
 )
 
-fun PageParam.auto(): PageRequest {
-    return when {
+val PageParam.auto: PageRequest
+    get() = when {
         orders.isEmpty() -> PageRequest.of(page, size)
-        else -> PageRequest.of(page, size, Sort.by(orders.map { it.auto() }))
+        else -> PageRequest.of(page, size, Sort.by(orders.map { it.auto }))
     }
-}
 
-fun OrderParam.auto(): Sort.Order {
-    return Sort.Order(direction, property)
-}
+val OrderParam.auto: Sort.Order
+    get() = Sort.Order(direction, property)

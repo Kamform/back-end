@@ -40,7 +40,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public PageHolder<AccountBooth> GetAccountBoothList(PageRequest request) {
-        return PageHolderKt.auto(repository.findAll(request).map(this::GetAccountBooth));
+        return PageHolderKt.getAuto(repository.findAll(request).map(this::GetAccountBooth));
     }
 
     // Methods Get Item
