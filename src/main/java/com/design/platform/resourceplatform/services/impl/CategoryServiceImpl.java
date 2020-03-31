@@ -1,6 +1,8 @@
 package com.design.platform.resourceplatform.services.impl;
 
 import com.design.platform.resourceplatform.entities.Category;
+import com.design.platform.resourceplatform.mappers.CategoryMapperKt;
+import com.design.platform.resourceplatform.mappers.ResourceMapperKt;
 import com.design.platform.resourceplatform.repositories.CategoryRepository;
 import com.design.platform.resourceplatform.repositories.ResourceRepository;
 import com.design.platform.resourceplatform.services.CategoryService;
@@ -41,14 +43,14 @@ public class CategoryServiceImpl implements CategoryService {
     public PageHolder<CategoryBooth> GetCategoryBoothList(PageRequest request) {
         return new PageHolder<>(
                 repository.findAll(request)
-                          .map(CategoryBooth::FromCategory));
+                          .map(CategoryMapperKt::map));
     }
 
     @Override
     public PageHolder<ResourceBooth> GetCategoryResourceBoothList(int id, PageRequest request) {
         return new PageHolder<>(
                 resourceRepository.findAllByCategory(GetCategory(id), request)
-                                  .map(ResourceBooth::FromResource));
+                                  .map(ResourceMapperKt::map));
     }
 
     // Methods Get Item
@@ -56,7 +58,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryBooth GetCategoryBooth(int id) {
-        return CategoryBooth.FromCategory(GetCategory(id));
+        return CategoryMapperKt.map(GetCategory(id));
     }
 
     @Override

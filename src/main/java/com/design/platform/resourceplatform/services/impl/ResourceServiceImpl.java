@@ -1,6 +1,7 @@
 package com.design.platform.resourceplatform.services.impl;
 
 import com.design.platform.resourceplatform.entities.Resource;
+import com.design.platform.resourceplatform.mappers.ResourceMapperKt;
 import com.design.platform.resourceplatform.repositories.ResourceRepository;
 import com.design.platform.resourceplatform.services.CategoryService;
 import com.design.platform.resourceplatform.services.FileService;
@@ -49,7 +50,7 @@ public class ResourceServiceImpl implements ResourceService {
     public PageHolder<ResourceBooth> GetResourceBoothList(PageRequest request) {
         return new PageHolder<>(
                 repository.findAll(request)
-                          .map(ResourceBooth::FromResource));
+                          .map(ResourceMapperKt::map));
     }
 
     @Override
@@ -72,7 +73,7 @@ public class ResourceServiceImpl implements ResourceService {
 
     @Override
     public ResourceBooth GetResourceBooth(int id) {
-        return ResourceBooth.FromResource(GetResource(id));
+        return ResourceMapperKt.map(GetResource(id));
     }
 
     @Override
@@ -95,14 +96,12 @@ public class ResourceServiceImpl implements ResourceService {
 
     @Override
     public Resource UpdateResource(ResourceRecorder recorder) {
-        return repository.save(recorder.ToResource(
-                this, categoryService, fileService));
+        return repository.save(ResourceMapperKt.map(recorder));
     }
 
     @Override
     public Resource CreateResource(ResourceDefiner definer) {
-        return repository.save(definer.ToResource(
-                userService, categoryService, fileService));
+        return repository.save(ResourceMapperKt.map(definer));
     }
 
     @Override

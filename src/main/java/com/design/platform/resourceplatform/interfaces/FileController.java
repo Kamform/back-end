@@ -1,7 +1,5 @@
 package com.design.platform.resourceplatform.interfaces;
 
-
-
 import com.design.platform.resourceplatform.entities.File;
 import com.design.platform.resourceplatform.services.FileRawService;
 import com.design.platform.resourceplatform.services.FileService;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
-import java.net.http.HttpResponse;
 
 //      GET /                   文件列表     无权限
 //      GET /{id}               单个文件信息 开放权限

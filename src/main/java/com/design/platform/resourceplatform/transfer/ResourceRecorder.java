@@ -11,17 +11,9 @@ import java.util.stream.Collectors;
 public class ResourceRecorder {
     public int id;
     public String title;
+    public int category;
+
     public String summary;
 
-    public int category;
     public List<Integer> files;
-
-    public Resource ToResource(ResourceService service, CategoryService categoryService, FileService fileService) {
-        Resource resource = service.GetResource(id);
-        resource.category = categoryService.GetCategory(category);
-        resource.title = title;
-        resource.summary = summary;
-        resource.files = files.stream().map(fileService::GetFile).collect(Collectors.toList());
-        return resource;
-    }
 }

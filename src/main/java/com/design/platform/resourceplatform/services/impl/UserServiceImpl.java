@@ -1,6 +1,8 @@
 package com.design.platform.resourceplatform.services.impl;
 
 import com.design.platform.resourceplatform.entities.User;
+import com.design.platform.resourceplatform.mappers.ResourceMapperKt;
+import com.design.platform.resourceplatform.mappers.UserMapperKt;
 import com.design.platform.resourceplatform.repositories.FileRepository;
 import com.design.platform.resourceplatform.repositories.ResourceRepository;
 import com.design.platform.resourceplatform.repositories.UserRepository;
@@ -71,7 +73,7 @@ public class UserServiceImpl implements UserService {
     public PageHolder<ResourceBooth> GetUserPublishedBoothList(int id, PageRequest request) {
         return new PageHolder<>(
                 resourceRepository.findAllByAuthor(GetUser(id), request)
-                                  .map(ResourceBooth::FromResource)
+                                  .map(ResourceMapperKt::map)
         );
     }
 
@@ -79,7 +81,7 @@ public class UserServiceImpl implements UserService {
     public PageHolder<ResourceBooth> GetUserFavoritesBoothList(int id, PageRequest request) {
         return new PageHolder<>(
                 resourceRepository.findAllByFavoriteBy(GetUser(id), request)
-                                  .map(ResourceBooth::FromResource)
+                                  .map(ResourceMapperKt::map)
         );
     }
 
@@ -98,17 +100,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserBooth GetUserBooth(User user) {
-        UserBooth booth = new UserBooth();
-        booth.id = user.id;
-        booth.username = user.account.username;
-        booth.phone = user.phone;
-        booth.email = user.email;
-        booth.isAdmin = user.account.admin;
-        booth.isEnable = user.account.enable;
-        booth.isLock = user.account.lock;
-        booth.created = user.account.created;
-        booth.updated = user.account.updated;
-        return booth;
+        return UserMapperKt.map(user);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.design.platform.resourceplatform.services.impl;
 
 import com.design.platform.resourceplatform.entities.File;
+import com.design.platform.resourceplatform.mappers.ResourceMapperKt;
 import com.design.platform.resourceplatform.repositories.FileRepository;
 import com.design.platform.resourceplatform.repositories.ResourceRepository;
 import com.design.platform.resourceplatform.services.FileRawService;
@@ -51,9 +52,9 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public PageHolder<ResourceBooth> GetFileContainedByBoothList(int id, PageRequest request) {
-        return new PageHolder<ResourceBooth>(
+        return new PageHolder<>(
                 resourceRepository.findAllByFiles(GetFile(id), request)
-                               .map(ResourceBooth::FromResource));
+                                  .map(ResourceMapperKt::map));
     }
 
     @Override

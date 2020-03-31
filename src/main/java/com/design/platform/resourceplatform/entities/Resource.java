@@ -35,19 +35,4 @@ public class Resource {
 
     @ManyToMany(mappedBy = "favorites")
     public List<User> favoriteBy;
-
-    @Override
-    public String toString() {
-        return "Resource{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", summary='" + summary + '\'' +
-                ", created=" + created +
-                ", updated=" + updated +
-                ", category=" + category +
-                ", author=" + author +
-                ", files=" + files +
-                ", favoriteBy=" + favoriteBy +
-                '}';
-    }
 }
