@@ -3,6 +3,7 @@ package com.design.platform.resourceplatform.services
 import com.design.platform.resourceplatform.entities.Admin
 import com.design.platform.resourceplatform.mappers.auto
 import com.design.platform.resourceplatform.repositories.AdminRepository
+import com.design.platform.resourceplatform.transfer.AdminBooth
 import com.design.platform.resourceplatform.transfer.AdminDefiner
 import com.design.platform.resourceplatform.transfer.AdminRecorder
 import com.design.platform.resourceplatform.utils.PageHolder
@@ -17,12 +18,12 @@ class AdminService(
     val repo: AdminRepository
 ) {
 
-    fun findAll(request: PageRequest): PageHolder<Admin> {
-        return repo.findAll(request).auto
+    fun findAll(request: PageRequest): PageHolder<AdminBooth> {
+        return repo.findAll(request).map { it.auto }.auto
     }
 
-    fun findOne(id: Int): Admin {
-        return repo.findById(id).orElseThrow()
+    fun findOne(id: Int): AdminBooth {
+        return repo.findById(id).orElseThrow().auto
     }
 
     fun update(recorder: AdminRecorder){

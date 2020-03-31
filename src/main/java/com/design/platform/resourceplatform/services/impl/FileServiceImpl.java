@@ -7,7 +7,6 @@ import com.design.platform.resourceplatform.repositories.FileRepository;
 import com.design.platform.resourceplatform.repositories.ResourceRepository;
 import com.design.platform.resourceplatform.services.FileRawService;
 import com.design.platform.resourceplatform.services.FileService;
-import com.design.platform.resourceplatform.services.UserService;
 import com.design.platform.resourceplatform.transfer.*;
 import com.design.platform.resourceplatform.utils.PageHolder;
 import org.springframework.data.domain.PageRequest;

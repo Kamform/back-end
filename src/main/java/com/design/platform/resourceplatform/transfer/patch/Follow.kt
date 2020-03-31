@@ -1,7 +1,6 @@
-package com.design.platform.resourceplatform.transfer.patch;
+package com.design.platform.resourceplatform.transfer.patch
 
-public class UserFollow {
-    public int self;
-    public int target;
-    public boolean cancel;
-}
+data class Follow(
+    var target: Int,
+    var cancel: Boolean = false
+)

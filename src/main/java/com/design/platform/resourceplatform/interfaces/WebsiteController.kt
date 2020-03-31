@@ -1,10 +1,13 @@
 package com.design.platform.resourceplatform.interfaces
 
+import com.design.platform.resourceplatform.entities.Account
 import com.design.platform.resourceplatform.mappers.auto
 import com.design.platform.resourceplatform.repositories.AdminRepository
 import com.design.platform.resourceplatform.transfer.AdminDefiner
 import com.design.platform.resourceplatform.transfer.params.Authenticator
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.core.Authentication
+import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
@@ -33,6 +36,7 @@ class WebsiteController {
     }
 
     @GetMapping("/api/authenticate")
-    fun authenticate(auth: Authenticator) {
+    fun authenticate(auth: Authenticator, @AuthenticationPrincipal master: Account) {
+
     }
 }

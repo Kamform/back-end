@@ -5,7 +5,7 @@ import com.design.platform.resourceplatform.entities.Resource;
 import com.design.platform.resourceplatform.services.ResourceService;
 import com.design.platform.resourceplatform.transfer.*;
 import com.design.platform.resourceplatform.utils.PageParam;
-import com.design.platform.resourceplatform.transfer.patch.ResourceFavorite;
+import com.design.platform.resourceplatform.transfer.patch.Favor;
 import com.design.platform.resourceplatform.utils.PageHolder;
 import com.design.platform.resourceplatform.utils.PageUtilsKt;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 //      GET /{id}/files       资源引用的文件 开放权限
 //      POST /                更新资源       主人权限
 //      PUT /                 创建资源       用户权限
-//      PATCH /favorite       收藏资源       用户权限
+//      PATCH /favor          收藏资源       用户权限
 //      DELETE /              删除资源       主人权限
 
 @RestController
@@ -70,7 +70,7 @@ public class ResourceController {
     }
 
     @PatchMapping("/favorite")
-    public void FavoriteResource(@RequestBody ResourceFavorite favorite) {
+    public void FavoriteResource(@RequestBody Favor favorite) {
         service.FavoriteResource(favorite);
     }
 

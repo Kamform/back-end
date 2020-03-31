@@ -9,6 +9,8 @@ import com.design.platform.resourceplatform.repositories.ResourceRepository
 import com.design.platform.resourceplatform.repositories.UserRepository
 import com.design.platform.resourceplatform.transfer.UserDefiner
 import com.design.platform.resourceplatform.transfer.UserRecorder
+import com.design.platform.resourceplatform.transfer.patch.Favor
+import com.design.platform.resourceplatform.transfer.patch.Follow
 import com.design.platform.resourceplatform.utils.PageHolder
 import com.design.platform.resourceplatform.utils.auto
 import org.springframework.beans.factory.annotation.Autowired
@@ -28,7 +30,6 @@ class UserService {
     lateinit var fileRepo: FileRepository
 
 
-    // ================================
     // find all
     // ================================
     fun findAll(request: PageRequest): PageHolder<User> {
@@ -55,14 +56,12 @@ class UserService {
         return fileRepo.findAllByContainedId(id, request).auto
     }
 
-    // ================================
     // find one
     // ================================
-    fun findOne(id: Int): User? {
+    fun findOne(id: Int): User {
         return repo.findById(id).orElseThrow()
     }
 
-    // ================================
     // modifies
     // ================================
     fun update(recorder: UserRecorder) {
@@ -78,4 +77,7 @@ class UserService {
     fun delete(id: Int) {
         repo.deleteById(id)
     }
+
+    // Methods patch
+    // ===============================================
 }

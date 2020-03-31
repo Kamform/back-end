@@ -1,59 +1,37 @@
-package com.design.platform.resourceplatform.interfaces;
+package com.design.platform.resourceplatform.interfaces
 
-
-import com.design.platform.resourceplatform.entities.Account;
-import com.design.platform.resourceplatform.services.AdminService;
-import com.design.platform.resourceplatform.transfer.AdminBooth;
-import com.design.platform.resourceplatform.transfer.AdminRecorder;
-import com.design.platform.resourceplatform.utils.PageHolder;
-import com.design.platform.resourceplatform.utils.PageParam;
-import com.design.platform.resourceplatform.utils.PageUtilsKt;
-import org.springframework.web.bind.annotation.*;
+import com.design.platform.resourceplatform.entities.Account
+import com.design.platform.resourceplatform.services.AdminService
+import com.design.platform.resourceplatform.transfer.AdminBooth
+import com.design.platform.resourceplatform.transfer.AdminDefiner
+import com.design.platform.resourceplatform.transfer.AdminRecorder
+import com.design.platform.resourceplatform.utils.PageHolder
+import com.design.platform.resourceplatform.utils.PageParam
+import com.design.platform.resourceplatform.utils.auto
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/admin")
-public class AdminController {
-
-    private final AdminService service;
-
-    public AdminController(AdminService service) {
-        this.service = service;
-    }
+class AdminController(
+    val service: AdminService
+) {
 
     // Methods GET
     // ===============================================
-
     @GetMapping
-    public PageHolder<AdminBooth> GetList(PageParam param) {
-        return service.GetAdminBoothList(PageUtilsKt.getAuto(param));
-    }
+    fun findAll(param: PageParam) = service.findAll(param.auto)
 
     @GetMapping("/{id}")
-    public AdminBooth GetAdmin(@PathVariable int id) {
-        return service.GetAdminBooth(id);
-    }
+    fun findOne(@PathVariable id: Int) = service.findOne(id)
 
     // Methods POST
     // ===============================================
-
     @PostMapping
-    public void UpdateAdmin(@RequestBody AdminRecorder recorder) {
-        System.out.println(recorder);
-        Account account =  service.UpdateAdmin(recorder);
-        System.out.println(account);
-    }
+    fun update(@RequestBody recorder: AdminRecorder) = service.update(recorder)
 
     @PutMapping
-    public void CreateAdmin(@RequestBody AdminDefiner definer) {
-        System.out.println(definer);
-        Account account =  service.CreateAdmin(definer);
-        System.out.println(account);
-    }
+    fun create(@RequestBody definer: AdminDefiner) = service.create(definer)
 
     @DeleteMapping("/{id}")
-    public void DeleteAdmin(@PathVariable int id){
-        System.out.println(id);
-        service.DestroyAdmin(id);
-        System.out.println("done");
-    }
+    fun delete(@PathVariable id: Int) = service.delete(id)
 }

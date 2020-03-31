@@ -1,7 +1,6 @@
-package com.design.platform.resourceplatform.transfer.patch;
+package com.design.platform.resourceplatform.transfer.patch
 
-public class ResourceFavorite {
-    public int user;
-    public int resource;
-    public boolean cancel;
-}
+data class Favor(
+    var resource: Int,
+    var cancel: Boolean = false
+)

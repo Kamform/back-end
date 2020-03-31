@@ -1,9 +1,8 @@
 package com.design.platform.resourceplatform.services;
 
 import com.design.platform.resourceplatform.entities.Resource;
-import com.design.platform.resourceplatform.repositories.ResourceRepository;
 import com.design.platform.resourceplatform.transfer.*;
-import com.design.platform.resourceplatform.transfer.patch.ResourceFavorite;
+import com.design.platform.resourceplatform.transfer.patch.Favor;
 import com.design.platform.resourceplatform.utils.PageHolder;
 import org.springframework.data.domain.PageRequest;
 
@@ -36,5 +35,5 @@ public interface ResourceService {
     // Methods Patch
     // ===============================================
 
-    void FavoriteResource(ResourceFavorite favorite);
+    void FavoriteResource(Favor favorite);
 }

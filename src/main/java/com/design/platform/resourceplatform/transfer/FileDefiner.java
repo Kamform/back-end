@@ -1,7 +1,6 @@
 package com.design.platform.resourceplatform.transfer;
 
 import com.design.platform.resourceplatform.entities.File;
-import com.design.platform.resourceplatform.services.UserService;
 
 public class FileDefiner {
     public String name = null;
