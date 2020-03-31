@@ -7,8 +7,9 @@ import com.design.platform.resourceplatform.transfer.CategoryBooth;
 import com.design.platform.resourceplatform.transfer.CategoryDefiner;
 import com.design.platform.resourceplatform.transfer.CategoryRecorder;
 import com.design.platform.resourceplatform.transfer.ResourceBooth;
-import com.design.platform.resourceplatform.transfer.params.PageQuery;
-import com.design.platform.resourceplatform.transfer.results.PageHolder;
+import com.design.platform.resourceplatform.utils.PageHolder;
+import com.design.platform.resourceplatform.utils.PageParam;
+import com.design.platform.resourceplatform.utils.PageUtilsKt;
 import org.springframework.web.bind.annotation.*;
 
 //      GET /                   种类列表       开放权限
@@ -35,13 +36,13 @@ public class CategoryController {
     // ===============================================
 
     @GetMapping
-    public PageHolder<CategoryBooth> GetCategoryList(PageQuery query) {
-        return service.GetCategoryBoothList(query.toRequest());
+    public PageHolder<CategoryBooth> GetCategoryList(PageParam param) {
+        return service.GetCategoryBoothList(PageUtilsKt.auto(param));
     }
 
     @GetMapping("/{id}/resources")
-    public PageHolder<ResourceBooth> GetResourceListByCategory(@PathVariable int id, PageQuery query) {
-        return service.GetCategoryResourceBoothList(id, query.toRequest());
+    public PageHolder<ResourceBooth> GetResourceListByCategory(@PathVariable int id, PageParam param) {
+        return service.GetCategoryResourceBoothList(id, PageUtilsKt.auto(param));
     }
 
     @GetMapping("/{id}")

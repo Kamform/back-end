@@ -8,7 +8,7 @@ import com.design.platform.resourceplatform.services.FileRawService;
 import com.design.platform.resourceplatform.services.FileService;
 import com.design.platform.resourceplatform.services.UserService;
 import com.design.platform.resourceplatform.transfer.*;
-import com.design.platform.resourceplatform.transfer.results.PageHolder;
+import com.design.platform.resourceplatform.utils.PageHolder;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -54,7 +54,7 @@ public class FileServiceImpl implements FileService {
     public PageHolder<ResourceBooth> GetFileContainedByBoothList(int id, PageRequest request) {
         return new PageHolder<>(
                 resourceRepository.findAllByFiles(GetFile(id), request)
-                                  .map(ResourceMapperKt::map));
+                                  .map(ResourceMapperKt::auto));
     }
 
     @Override

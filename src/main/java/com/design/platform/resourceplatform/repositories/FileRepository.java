@@ -14,6 +14,8 @@ import java.util.List;
 public interface FileRepository extends JpaRepository<File, Integer> {
 
     Page<File> findAllByAuthor(User author, Pageable pageable);
+    Page<File> findAllByAuthorId(int id, Pageable pageable);
 
-    Page<File> findAllByContainedBy(Resource resource, Pageable pageable);
+    Page<File> findAllByContained(Resource resource, Pageable pageable);
+    Page<File> findAllByContainedId(int id, Pageable pageable);
 }

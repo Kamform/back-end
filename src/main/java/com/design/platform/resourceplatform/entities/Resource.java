@@ -34,5 +34,5 @@ public class Resource {
     public List<File> files;
 
     @ManyToMany(mappedBy = "favorites")
-    public List<User> favoriteBy;
+    public List<User> favored;
 }

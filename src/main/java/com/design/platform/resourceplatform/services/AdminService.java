@@ -2,7 +2,7 @@ package com.design.platform.resourceplatform.services;
 
 import com.design.platform.resourceplatform.entities.Account;
 import com.design.platform.resourceplatform.transfer.*;
-import com.design.platform.resourceplatform.transfer.results.PageHolder;
+import com.design.platform.resourceplatform.utils.PageHolder;
 import org.springframework.data.domain.PageRequest;
 
 public interface AdminService {

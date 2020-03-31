@@ -4,8 +4,9 @@ import com.design.platform.resourceplatform.services.AccountService;
 import com.design.platform.resourceplatform.transfer.AccountBooth;
 import com.design.platform.resourceplatform.transfer.AccountDefiner;
 import com.design.platform.resourceplatform.transfer.AccountRecorder;
-import com.design.platform.resourceplatform.transfer.params.PageQuery;
-import com.design.platform.resourceplatform.transfer.results.PageHolder;
+import com.design.platform.resourceplatform.utils.PageHolder;
+import com.design.platform.resourceplatform.utils.PageParam;
+import com.design.platform.resourceplatform.utils.PageUtilsKt;
 import org.springframework.web.bind.annotation.*;
 
 // account/** 基础账号管理
@@ -32,8 +33,8 @@ public class AccountController {
     // ===============================================
 
     @GetMapping
-    public PageHolder<AccountBooth> GetAccountList(PageQuery query) {
-        return service.GetAccountBoothList(query.toRequest());
+    public PageHolder<AccountBooth> GetAccountList(PageParam param) {
+        return service.GetAccountBoothList(PageUtilsKt.auto(param));
     }
 
     @GetMapping("/{id}")

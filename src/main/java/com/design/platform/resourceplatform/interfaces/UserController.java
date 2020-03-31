@@ -3,9 +3,10 @@ package com.design.platform.resourceplatform.interfaces;
 
 import com.design.platform.resourceplatform.services.UserService;
 import com.design.platform.resourceplatform.transfer.*;
-import com.design.platform.resourceplatform.transfer.params.PageQuery;
 import com.design.platform.resourceplatform.transfer.patch.UserFollow;
-import com.design.platform.resourceplatform.transfer.results.PageHolder;
+import com.design.platform.resourceplatform.utils.PageHolder;
+import com.design.platform.resourceplatform.utils.PageParam;
+import com.design.platform.resourceplatform.utils.PageUtilsKt;
 import org.springframework.web.bind.annotation.*;
 
 //      GET /               用户列表       无权限
@@ -37,33 +38,33 @@ public class UserController {
     // ===============================================
 
     @GetMapping
-    public PageHolder<UserBooth> GetUserList(PageQuery query) {
-        return service.GetUserBoothList(query.toRequest());
+    public PageHolder<UserBooth> GetUserList(PageParam param) {
+        return service.GetUserBoothList(PageUtilsKt.auto(param));
     }
 
     @GetMapping("/{id}/followers")
-    public PageHolder<UserBooth> GetUserFollowersList(@PathVariable int id, PageQuery query) {
-        return service.GetUserFollowersBoothList(id, query.toRequest());
+    public PageHolder<UserBooth> GetUserFollowersList(@PathVariable int id, PageParam param) {
+        return service.GetUserFollowersBoothList(id, PageUtilsKt.auto(param));
     }
 
     @GetMapping("/{id}/followed")
-    public PageHolder<UserBooth> GetUserFollowedList(@PathVariable int id, PageQuery query) {
-        return service.GetUserFollowedBoothList(id, query.toRequest());
+    public PageHolder<UserBooth> GetUserFollowedList(@PathVariable int id, PageParam param) {
+        return service.GetUserFollowedBoothList(id, PageUtilsKt.auto(param));
     }
 
     @GetMapping("/{id}/published")
-    public PageHolder<ResourceBooth> GetUserPublished(@PathVariable int id, PageQuery query) {
-        return service.GetUserPublishedBoothList(id, query.toRequest());
+    public PageHolder<ResourceBooth> GetUserPublished(@PathVariable int id, PageParam param) {
+        return service.GetUserPublishedBoothList(id, PageUtilsKt.auto(param));
     }
 
     @GetMapping("/{id}/favorites")
-    public PageHolder<ResourceBooth> GetUserFavorites(@PathVariable int id, PageQuery query) {
-        return service.GetUserFavoritesBoothList(id, query.toRequest());
+    public PageHolder<ResourceBooth> GetUserFavorites(@PathVariable int id, PageParam param) {
+        return service.GetUserFavoritesBoothList(id, PageUtilsKt.auto(param));
     }
 
     @GetMapping("/{id}/files")
-    public PageHolder<FileBooth> GetUserFiles(@PathVariable int id, PageQuery query) {
-        return service.GetUserFilesBoothList(id, query.toRequest());
+    public PageHolder<FileBooth> GetUserFiles(@PathVariable int id, PageParam param) {
+        return service.GetUserFilesBoothList(id, PageUtilsKt.auto(param));
     }
 
     @GetMapping("/{id}")

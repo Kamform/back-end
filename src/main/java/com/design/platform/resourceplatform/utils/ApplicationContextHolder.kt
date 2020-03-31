@@ -1,6 +1,5 @@
-package com.design.platform.resourceplatform.configuration
+package com.design.platform.resourceplatform.utils
 
-import org.springframework.beans.BeansException
 import org.springframework.context.ApplicationContext
 import org.springframework.context.ApplicationContextAware
 

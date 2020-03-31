@@ -10,7 +10,7 @@ import com.design.platform.resourceplatform.services.AccountService;
 import com.design.platform.resourceplatform.services.UserService;
 import com.design.platform.resourceplatform.transfer.*;
 import com.design.platform.resourceplatform.transfer.patch.UserFollow;
-import com.design.platform.resourceplatform.transfer.results.PageHolder;
+import com.design.platform.resourceplatform.utils.PageHolder;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -73,15 +73,15 @@ public class UserServiceImpl implements UserService {
     public PageHolder<ResourceBooth> GetUserPublishedBoothList(int id, PageRequest request) {
         return new PageHolder<>(
                 resourceRepository.findAllByAuthor(GetUser(id), request)
-                                  .map(ResourceMapperKt::map)
+                                  .map(ResourceMapperKt::auto)
         );
     }
 
     @Override
     public PageHolder<ResourceBooth> GetUserFavoritesBoothList(int id, PageRequest request) {
         return new PageHolder<>(
-                resourceRepository.findAllByFavoriteBy(GetUser(id), request)
-                                  .map(ResourceMapperKt::map)
+                resourceRepository.findAllByFavored(GetUser(id), request)
+                                  .map(ResourceMapperKt::auto)
         );
     }
 
@@ -100,7 +100,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserBooth GetUserBooth(User user) {
-        return UserMapperKt.map(user);
+        return UserMapperKt.auto(user);
     }
 
     @Override

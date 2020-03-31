@@ -21,5 +21,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     Page<User> findAllByFavorites(Resource favorite, Pageable pageable);
 
+    Page<User> findAllByFavoritesId(int id, Pageable pageable);
+
     Optional<User> findByFiles(File file);
 }

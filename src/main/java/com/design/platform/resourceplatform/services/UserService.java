@@ -4,10 +4,8 @@ import com.design.platform.resourceplatform.entities.User;
 import com.design.platform.resourceplatform.repositories.UserRepository;
 import com.design.platform.resourceplatform.transfer.*;
 import com.design.platform.resourceplatform.transfer.patch.UserFollow;
-import com.design.platform.resourceplatform.transfer.results.PageHolder;
+import com.design.platform.resourceplatform.utils.PageHolder;
 import org.springframework.data.domain.PageRequest;
-
-import java.util.List;
 
 public interface UserService {
 

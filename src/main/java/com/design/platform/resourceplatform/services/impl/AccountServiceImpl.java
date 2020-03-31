@@ -6,7 +6,8 @@ import com.design.platform.resourceplatform.services.AccountService;
 import com.design.platform.resourceplatform.transfer.AccountBooth;
 import com.design.platform.resourceplatform.transfer.AccountDefiner;
 import com.design.platform.resourceplatform.transfer.AccountRecorder;
-import com.design.platform.resourceplatform.transfer.results.PageHolder;
+import com.design.platform.resourceplatform.utils.PageHolder;
+import com.design.platform.resourceplatform.utils.PageHolderKt;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -39,7 +40,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public PageHolder<AccountBooth> GetAccountBoothList(PageRequest request) {
-        return PageHolder.FromPage(repository.findAll(request).map(this::GetAccountBooth));
+        return PageHolderKt.auto(repository.findAll(request).map(this::GetAccountBooth));
     }
 
     // Methods Get Item

@@ -7,8 +7,9 @@ import com.design.platform.resourceplatform.transfer.FileBooth;
 import com.design.platform.resourceplatform.transfer.FileDefiner;
 import com.design.platform.resourceplatform.transfer.FileRecorder;
 import com.design.platform.resourceplatform.transfer.ResourceBooth;
-import com.design.platform.resourceplatform.transfer.params.PageQuery;
-import com.design.platform.resourceplatform.transfer.results.PageHolder;
+import com.design.platform.resourceplatform.utils.PageHolder;
+import com.design.platform.resourceplatform.utils.PageParam;
+import com.design.platform.resourceplatform.utils.PageUtilsKt;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
@@ -43,8 +44,8 @@ public class FileController {
     // ===============================================
 
     @GetMapping
-    public PageHolder<FileBooth> GetFileList(PageQuery query) {
-        return service.GetFileBoothList(query.toRequest());
+    public PageHolder<FileBooth> GetFileList(PageParam param) {
+        return service.GetFileBoothList(PageUtilsKt.auto(param));
     }
 
     @GetMapping("/{id}")
@@ -53,8 +54,8 @@ public class FileController {
     }
 
     @GetMapping("/{id}/contained-by")
-    public PageHolder<ResourceBooth> GetFileContainedList(@PathVariable int id, PageQuery query) {
-        return service.GetFileContainedByBoothList(id, query.toRequest());
+    public PageHolder<ResourceBooth> GetFileContainedList(@PathVariable int id, PageParam param) {
+        return service.GetFileContainedByBoothList(id, PageUtilsKt.auto(param));
     }
 
     @GetMapping(value = "/{id}/download", consumes = "*/*")

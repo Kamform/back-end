@@ -7,7 +7,8 @@ import com.design.platform.resourceplatform.services.AdminService;
 import com.design.platform.resourceplatform.transfer.AdminBooth;
 import com.design.platform.resourceplatform.transfer.AdminDefiner;
 import com.design.platform.resourceplatform.transfer.AdminRecorder;
-import com.design.platform.resourceplatform.transfer.results.PageHolder;
+import com.design.platform.resourceplatform.utils.PageHolder;
+import com.design.platform.resourceplatform.utils.PageHolderKt;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public PageHolder<AdminBooth> GetAdminBoothList(PageRequest request) {
-        return PageHolder.FromPage(repository.findAllByAdminIsTrue(request).map(this::GetAdminBooth));
+        return PageHolderKt.auto(repository.findAllByAdminIsTrue(request).map(this::GetAdminBooth));
     }
 
     @Override

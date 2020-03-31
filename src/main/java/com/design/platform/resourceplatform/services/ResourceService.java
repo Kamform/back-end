@@ -4,14 +4,10 @@ import com.design.platform.resourceplatform.entities.Resource;
 import com.design.platform.resourceplatform.repositories.ResourceRepository;
 import com.design.platform.resourceplatform.transfer.*;
 import com.design.platform.resourceplatform.transfer.patch.ResourceFavorite;
-import com.design.platform.resourceplatform.transfer.results.PageHolder;
+import com.design.platform.resourceplatform.utils.PageHolder;
 import org.springframework.data.domain.PageRequest;
 
-import java.util.List;
-
 public interface ResourceService {
-
-    ResourceRepository repository();
 
     // Methods Get List
     // ===============================================
@@ -34,9 +30,7 @@ public interface ResourceService {
     // ===============================================
 
     Resource UpdateResource(ResourceRecorder recorder);
-
     Resource CreateResource(ResourceDefiner definer);
-
     void DestroyResource(int id);
 
     // Methods Patch

@@ -3,7 +3,7 @@ package com.design.platform.resourceplatform.services;
 import com.design.platform.resourceplatform.entities.File;
 import com.design.platform.resourceplatform.repositories.FileRepository;
 import com.design.platform.resourceplatform.transfer.*;
-import com.design.platform.resourceplatform.transfer.results.PageHolder;
+import com.design.platform.resourceplatform.utils.PageHolder;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.multipart.MultipartFile;
 

@@ -5,11 +5,9 @@ import com.design.platform.resourceplatform.repositories.AccountRepository;
 import com.design.platform.resourceplatform.transfer.AccountBooth;
 import com.design.platform.resourceplatform.transfer.AccountDefiner;
 import com.design.platform.resourceplatform.transfer.AccountRecorder;
-import com.design.platform.resourceplatform.transfer.results.PageHolder;
+import com.design.platform.resourceplatform.utils.PageHolder;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.userdetails.UserDetailsService;
-
-import java.util.List;
 
 public interface AccountService extends UserDetailsService {
 

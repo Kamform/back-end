@@ -6,8 +6,9 @@ import com.design.platform.resourceplatform.services.AdminService;
 import com.design.platform.resourceplatform.transfer.AdminBooth;
 import com.design.platform.resourceplatform.transfer.AdminDefiner;
 import com.design.platform.resourceplatform.transfer.AdminRecorder;
-import com.design.platform.resourceplatform.transfer.params.PageQuery;
-import com.design.platform.resourceplatform.transfer.results.PageHolder;
+import com.design.platform.resourceplatform.utils.PageHolder;
+import com.design.platform.resourceplatform.utils.PageParam;
+import com.design.platform.resourceplatform.utils.PageUtilsKt;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -24,8 +25,8 @@ public class AdminController {
     // ===============================================
 
     @GetMapping
-    public PageHolder<AdminBooth> GetList(PageQuery query) {
-        return service.GetAdminBoothList(query.toRequest());
+    public PageHolder<AdminBooth> GetList(PageParam param) {
+        return service.GetAdminBoothList(PageUtilsKt.auto(param));
     }
 
     @GetMapping("/{id}")

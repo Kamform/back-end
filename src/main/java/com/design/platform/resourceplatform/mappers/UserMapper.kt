@@ -7,7 +7,7 @@ import com.design.platform.resourceplatform.transfer.UserRecorder
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
-fun User.map(): UserBooth = UserBooth(
+fun User.auto(): UserBooth = UserBooth(
     id,
     account.username,
     account.admin,

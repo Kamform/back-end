@@ -34,5 +34,5 @@ public class File {
     public User author;
 
     @ManyToMany(mappedBy = "files")
-    public List<Resource> containedBy;
+    public List<Resource> contained;
 }

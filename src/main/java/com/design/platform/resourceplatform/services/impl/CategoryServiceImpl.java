@@ -10,7 +10,7 @@ import com.design.platform.resourceplatform.transfer.CategoryBooth;
 import com.design.platform.resourceplatform.transfer.CategoryDefiner;
 import com.design.platform.resourceplatform.transfer.CategoryRecorder;
 import com.design.platform.resourceplatform.transfer.ResourceBooth;
-import com.design.platform.resourceplatform.transfer.results.PageHolder;
+import com.design.platform.resourceplatform.utils.PageHolder;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -43,14 +43,14 @@ public class CategoryServiceImpl implements CategoryService {
     public PageHolder<CategoryBooth> GetCategoryBoothList(PageRequest request) {
         return new PageHolder<>(
                 repository.findAll(request)
-                          .map(CategoryMapperKt::map));
+                          .map(CategoryMapperKt::auto));
     }
 
     @Override
     public PageHolder<ResourceBooth> GetCategoryResourceBoothList(int id, PageRequest request) {
         return new PageHolder<>(
                 resourceRepository.findAllByCategory(GetCategory(id), request)
-                                  .map(ResourceMapperKt::map));
+                                  .map(ResourceMapperKt::auto));
     }
 
     // Methods Get Item
@@ -58,7 +58,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryBooth GetCategoryBooth(int id) {
-        return CategoryMapperKt.map(GetCategory(id));
+        return CategoryMapperKt.auto(GetCategory(id));
     }
 
     @Override

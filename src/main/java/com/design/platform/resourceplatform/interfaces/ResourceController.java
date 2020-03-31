@@ -4,11 +4,10 @@ package com.design.platform.resourceplatform.interfaces;
 import com.design.platform.resourceplatform.entities.Resource;
 import com.design.platform.resourceplatform.services.ResourceService;
 import com.design.platform.resourceplatform.transfer.*;
-import com.design.platform.resourceplatform.transfer.params.PageQuery;
+import com.design.platform.resourceplatform.utils.PageParam;
 import com.design.platform.resourceplatform.transfer.patch.ResourceFavorite;
-import com.design.platform.resourceplatform.transfer.results.PageHolder;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import com.design.platform.resourceplatform.utils.PageHolder;
+import com.design.platform.resourceplatform.utils.PageUtilsKt;
 import org.springframework.web.bind.annotation.*;
 
 //      GET /                 资源列表       无权限
@@ -37,27 +36,18 @@ public class ResourceController {
     // ===============================================
 
     @GetMapping
-    public PageHolder<ResourceBooth> GetResourceList(PageQuery query) {
-        return service.GetResourceBoothList(query.toRequest());
-    }
-
-    @GetMapping("/recent")
-    public PageHolder<ResourceBooth> GetResourceListOrderByUpdated(PageQuery query) {
-        return service.GetResourceBoothList(
-                PageRequest.of(
-                        query.page,
-                        query.size,
-                        Sort.by(Sort.Order.desc("updated"))));
+    public PageHolder<ResourceBooth> GetResourceList(PageParam param) {
+        return service.GetResourceBoothList(PageUtilsKt.auto(param));
     }
 
     @GetMapping("/{id}/favorite-by")
-    public PageHolder<UserBooth> GetResourceFavoriteByList(@PathVariable int id, PageQuery query) {
-        return service.GetResourceFavoriteByBoothList(id, query.toRequest());
+    public PageHolder<UserBooth> GetResourceFavoriteByList(@PathVariable int id, PageParam param) {
+        return service.GetResourceFavoriteByBoothList(id, PageUtilsKt.auto(param));
     }
 
     @GetMapping("/{id}/files")
-    public PageHolder<FileBooth> GetResourceFileList(@PathVariable int id, PageQuery query) {
-        return service.GetResourceFilesBoothList(id, query.toRequest());
+    public PageHolder<FileBooth> GetResourceFileList(@PathVariable int id, PageParam param) {
+        return service.GetResourceFilesBoothList(id, PageUtilsKt.auto(param));
     }
 
     @GetMapping("/{id}")
