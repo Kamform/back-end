@@ -1,13 +1,19 @@
 package com.design.platform.resourceplatform.configuration;
 
+import com.design.platform.resourceplatform.security.BearerAuthenticationFilter;
+import com.design.platform.resourceplatform.security.Expression;
+import com.fasterxml.jackson.databind.Module;
+import com.fasterxml.jackson.module.kotlin.KotlinModule;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -75,14 +81,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
 
             .antMatchers("/init").permitAll()
-            .antMatchers("/api/login").permitAll()
-            .antMatchers("/api/**").permitAll()
+            .antMatchers("/api/authenticate").permitAll()
+            .antMatchers("/api/admin/**").access("@expression.isUser")
+            .antMatchers("/test").authenticated()
 
             .anyRequest().denyAll();
 
-        http.httpBasic();
+        http.addFilterAfter(new BearerAuthenticationFilter(), LogoutFilter.class);
         http.cors().configurationSource(corsConfiguration());
 
+        http.logout().disable();
+        http.rememberMe().disable();
+        http.requestCache().disable();
         http.sessionManagement().disable();
         http.csrf().disable();
     }
@@ -99,11 +109,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public boolean isAdmin() {
-        return true;
-    }
-
-    @Bean
     public boolean isUser() {
         return true;
     }
@@ -115,6 +120,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     public boolean permitUser() {
         return true;
+    }
+
+    @Bean
+    public Expression expression() {
+        return new Expression();
     }
 
     // Methods Beans

@@ -6,11 +6,12 @@ import com.design.platform.resourceplatform.entities.User
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor
 import org.springframework.stereotype.Repository
 import java.util.*
 
 @Repository
-interface UserRepository : JpaRepository<User, Int> {
+interface UserRepository : JpaRepository<User, Int>, JpaSpecificationExecutor<User> {
 
     fun findAllByFans(followed: User?, pageable: Pageable?): Page<User?>?
 

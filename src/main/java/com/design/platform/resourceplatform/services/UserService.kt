@@ -18,17 +18,11 @@ import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
 
 @Service
-class UserService {
-
-    @Autowired
-    lateinit var repo: UserRepository
-
-    @Autowired
-    lateinit var resourceRepo: ResourceRepository
-
-    @Autowired
-    lateinit var fileRepo: FileRepository
-
+class UserService(
+    val repo: UserRepository,
+    val resourceRepo: ResourceRepository,
+    val fileRepo: FileRepository
+) {
 
     // find all
     // ================================
