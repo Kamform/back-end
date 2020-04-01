@@ -1,11 +1,13 @@
 package com.design.platform.resourceplatform.transfer
 
+import javax.validation.constraints.NotBlank
+
 data class UserDefiner(
-    val username: String,
-    val password: String,
-    val nickname: String = "new user",
-    val email: String = "",
-    val phone: String = "",
+    @NotBlank val username: String,
+    @NotBlank val password: String,
+    @NotBlank val nickname: String = "new user",
+    @NotBlank val email: String = "",
+    @NotBlank val phone: String = "",
     val isEnable: Boolean = true,
     val isLock: Boolean = false
 )

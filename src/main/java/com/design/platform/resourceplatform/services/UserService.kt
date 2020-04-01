@@ -64,14 +64,12 @@ class UserService {
 
     // modifies
     // ================================
-    fun update(recorder: UserRecorder) {
-        val result = repo.save(recorder.auto)
-        println(result)
+    fun update(recorder: UserRecorder): User {
+        return repo.save(recorder.auto).also(::println)
     }
 
-    fun create(definer: UserDefiner) {
-        val result = repo.save(definer.auto)
-        println(result)
+    fun create(definer: UserDefiner): User {
+        return repo.save(definer.auto).also(::println)
     }
 
     fun delete(id: Int) {
@@ -80,4 +78,11 @@ class UserService {
 
     // Methods patch
     // ===============================================
+    fun follow(master: User, follow: Follow) {
+        when (follow.cancel) {
+            true -> master.idols.remove(findOne(follow.target))
+            false -> master.idols.add(findOne(follow.target))
+        }
+        repo.save(master)
+    }
 }

@@ -9,6 +9,7 @@ import com.design.platform.resourceplatform.utils.PageHolder
 import com.design.platform.resourceplatform.utils.PageParam
 import com.design.platform.resourceplatform.utils.auto
 import org.springframework.security.core.annotation.AuthenticationPrincipal
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 
 //      GET /               用户列表       无权限
@@ -54,10 +55,15 @@ class UserController(
     // Methods POST
     // ===============================================
     @PostMapping
-    fun update(@RequestBody recorder: UserRecorder) = service.update(recorder)
+    fun update(@Validated @RequestBody recorder: UserRecorder) = service.update(recorder)
 
     @PutMapping
-    fun create(@RequestBody definer: UserDefiner) = service.create(definer)
+    fun create(@Validated @RequestBody definer: UserDefiner) = service.create(definer)
+
+    @PatchMapping
+    fun follow(follow: Follow, @AuthenticationPrincipal account: Account) {
+        service.follow(account as User, follow)
+    }
 
     @DeleteMapping("/{id}")
     fun delete(@PathVariable id: Int) = service.delete(id)

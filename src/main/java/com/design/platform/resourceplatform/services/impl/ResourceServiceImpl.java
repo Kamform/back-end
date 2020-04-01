@@ -101,11 +101,9 @@ public class ResourceServiceImpl implements ResourceService {
     // ===============================================
 
     @Override
-    public void FavoriteResource(Favor favorite) {
-        Resource resource = resources.findById(favorite.resource).orElseThrow();
-        User user = users.findById(favorite.user).orElseThrow();
-        if (favorite.cancel) resource.favored.remove(user);
-        else resource.favored.add(user);
-        resources.save(resource);
+    public void FavoriteResource(User master,  Favor favor) {
+        if (favor.getCancel()) master.favorites.add(GetResource(favor.getResource()));
+        else master.favorites.remove(GetResource(favor.getResource()));
+        users.save(master);
     }
 }

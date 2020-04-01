@@ -74,70 +74,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
 
-            .antMatchers("/api/login").authenticated()
+            .antMatchers("/init").permitAll()
+            .antMatchers("/api/login").permitAll()
             .antMatchers("/api/**").permitAll()
 
             .anyRequest().denyAll();
-//
-//            // account
-//            .antMatchers(HttpMethod.GET,
-//                         "/account/**").access("@securityConfiguration.denyUser()")
-//            .antMatchers(HttpMethod.POST,
-//                         "/account").access("@securityConfiguration.denyUser()")
-//            .antMatchers(HttpMethod.PUT,
-//                         "/account").access("@securityConfiguration.denyUser()")
-//            .antMatchers(HttpMethod.POST,
-//                         "/account").access("@securityConfiguration.denyUser()")
-//
-//
-//            // category
-//            .antMatchers(HttpMethod.GET,
-//                         "/category/**").access("@securityConfiguration.denyUser()")
-//            .antMatchers(HttpMethod.POST,
-//                         "/category").access("@securityConfiguration.denyUser()")
-//            .antMatchers(HttpMethod.PUT,
-//                         "/category").access("@securityConfiguration.denyUser()")
-//            .antMatchers(HttpMethod.DELETE,
-//                         "/category").access("@securityConfiguration.denyUser()")
-//
-//            // file
-//            .antMatchers(HttpMethod.GET,
-//                         "/file/**").access("permitAll()")
-//
-//            // resource
-//            .antMatchers(HttpMethod.GET,
-//                         "/resource/**").access("@securityConfiguration.permitUser()")
-//            .antMatchers(HttpMethod.GET,
-//                         "/resource/*/files").access("@securityConfiguration.permitUser()")
-//            .antMatchers(HttpMethod.GET,
-//                         "/resource/*/favorites-by").access("@securityConfiguration.checkUser('MASTER')")
-//            .antMatchers(HttpMethod.POST,
-//                         "/resource").access("@securityConfiguration.checkUser('MASTER')")
-//            .antMatchers(HttpMethod.PUT,
-//                         "/resource").access("@securityConfiguration.permitUser()")
-//            .antMatchers(HttpMethod.DELETE,
-//                         "/resource").access("@securityConfiguration.checkUser('MASTER')")
-//
-//            // user
-//            .antMatchers(HttpMethod.GET,
-//                         "/user/**").access("@securityConfiguration.denyUser()")
-//            .antMatchers(HttpMethod.GET,
-//                         "/user/*/followed").access("@securityConfiguration.checkUser('MASTER')")
-//            .antMatchers(HttpMethod.GET,
-//                         "/user/*/followers").access("@securityConfiguration.checkUser('MASTER')")
-//            .antMatchers(HttpMethod.GET,
-//                         "/user/*/published").access("@securityConfiguration.checkUser('MASTER')")
-//            .antMatchers(HttpMethod.GET,
-//                         "/user/*/favorites").access("@securityConfiguration.checkUser('MASTER')")
-//            .antMatchers(HttpMethod.GET,
-//                         "/user/*/files").access("@securityConfiguration.checkUser('MASTER')")
-//            .antMatchers(HttpMethod.POST,
-//                         "/user").access("@securityConfiguration.checkUser('MASTER')")
-//            .antMatchers(HttpMethod.PUT,
-//                         "/user").access("permitAll()")
-//            .antMatchers(HttpMethod.DELETE,
-//                         "/user").access("@securityConfiguration.checkUser('MASTER')")
-
 
         http.httpBasic();
         http.cors().configurationSource(corsConfiguration());

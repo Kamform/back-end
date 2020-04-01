@@ -7,6 +7,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.List;
@@ -16,9 +18,13 @@ public abstract class Account implements UserDetails {
 
     @Id
     @GeneratedValue
+    @Positive
     public int id;
 
+    @NotBlank
     public String username;
+
+    @NotBlank
     public String password;
 
     @Column(name = "is_enable")

@@ -26,14 +26,12 @@ class AdminService(
         return repo.findById(id).orElseThrow().auto
     }
 
-    fun update(recorder: AdminRecorder){
-        val result = repo.save(recorder.auto)
-        println(result)
+    fun update(recorder: AdminRecorder): Admin {
+        return repo.save(recorder.auto).also(::println)
     }
 
-    fun create(definer: AdminDefiner){
-        val result = repo.save(definer.auto)
-        println(result)
+    fun create(definer: AdminDefiner): Admin {
+        return repo.save(definer.auto).also(::println)
     }
 
     fun delete(id: Int){

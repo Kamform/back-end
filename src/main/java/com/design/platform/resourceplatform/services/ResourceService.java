@@ -1,6 +1,7 @@
 package com.design.platform.resourceplatform.services;
 
 import com.design.platform.resourceplatform.entities.Resource;
+import com.design.platform.resourceplatform.entities.User;
 import com.design.platform.resourceplatform.transfer.*;
 import com.design.platform.resourceplatform.transfer.patch.Favor;
 import com.design.platform.resourceplatform.utils.PageHolder;
@@ -35,5 +36,5 @@ public interface ResourceService {
     // Methods Patch
     // ===============================================
 
-    void FavoriteResource(Favor favorite);
+    void FavoriteResource(User master, Favor favor);
 }

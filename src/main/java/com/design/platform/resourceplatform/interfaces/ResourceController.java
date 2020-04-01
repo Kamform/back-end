@@ -1,13 +1,14 @@
 package com.design.platform.resourceplatform.interfaces;
 
-
 import com.design.platform.resourceplatform.entities.Resource;
+import com.design.platform.resourceplatform.entities.User;
 import com.design.platform.resourceplatform.services.ResourceService;
 import com.design.platform.resourceplatform.transfer.*;
 import com.design.platform.resourceplatform.utils.PageParam;
 import com.design.platform.resourceplatform.transfer.patch.Favor;
 import com.design.platform.resourceplatform.utils.PageHolder;
 import com.design.platform.resourceplatform.utils.PageUtilsKt;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 //      GET /                 资源列表       无权限
@@ -70,8 +71,8 @@ public class ResourceController {
     }
 
     @PatchMapping("/favorite")
-    public void FavoriteResource(@RequestBody Favor favorite) {
-        service.FavoriteResource(favorite);
+    public void FavoriteResource(@RequestBody Favor favor, @AuthenticationPrincipal User master) {
+        service.FavoriteResource(master, favor);
     }
 
     @DeleteMapping

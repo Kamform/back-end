@@ -2,7 +2,9 @@ package com.design.platform.resourceplatform.utils
 
 import org.springframework.context.ApplicationContext
 import org.springframework.context.ApplicationContextAware
+import org.springframework.stereotype.Component
 
+@Component
 class ApplicationContextHolder : ApplicationContextAware {
 
     override fun setApplicationContext(input: ApplicationContext) {

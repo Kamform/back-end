@@ -6,6 +6,7 @@ import com.design.platform.resourceplatform.transfer.AdminBooth
 import com.design.platform.resourceplatform.transfer.AdminDefiner
 import com.design.platform.resourceplatform.transfer.AdminRecorder
 import com.design.platform.resourceplatform.utils.ApplicationContextHolder
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.security.crypto.password.PasswordEncoder
 
 val Admin.auto
@@ -19,6 +20,7 @@ val AdminDefiner.auto: Admin
         return Admin().also {
             it.username = this.username
             it.password = encoder.encode(this.password)
+            it.nickname = this.nickname
             it.enable = isEnable
             it.lock = isLock
         }
@@ -29,10 +31,11 @@ val AdminRecorder.auto: Admin
         val encoder = ApplicationContextHolder.getBean(PasswordEncoder::class.java)
         val repo = ApplicationContextHolder.getBean(AdminRepository::class.java)
         return repo.findById(id).orElseThrow().also {
-            it.nickname = this.nickname
-            if (this.password.isNotBlank())
-                it.password = encoder.encode(this.password)
-            it.enable = isEnable
-            it.lock = isLock
+            when {
+                this.nickname.isNotBlank() -> it.nickname = this.nickname
+                this.password.isNotBlank() -> it.password = encoder.encode(this.password)
+                this.isEnable != null -> it.enable = isEnable
+                this.isLock != null -> it.lock = isLock
+            }
         }
     }

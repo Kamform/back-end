@@ -26,9 +26,6 @@ val UserDefiner.auto: User
         val encoder = ApplicationContextHolder.getBean(PasswordEncoder::class.java)
 
         return User().also {
-            assert(password.isNotBlank())
-            assert(nickname.isNotBlank())
-            assert(email.isNotBlank() || phone.isNotBlank())
             it.username = username
             it.password = encoder.encode(password)
             it.nickname = nickname
@@ -45,15 +42,14 @@ val UserRecorder.auto: User
         val repo = ApplicationContextHolder.getBean(UserRepository::class.java)
 
         return repo.findById(id).orElseThrow().also {
-            assert(nickname.isNotBlank())
-            assert(email.isNotBlank() || phone.isNotBlank())
-            if (password.isNotBlank())
-                it.password = encoder.encode(password)
-            it.nickname = nickname
-            it.email = email
-            it.phone = phone
-            it.enable = isEnable
-            it.lock = isLock
+            when {
+                password.isNotBlank() -> it.password = encoder.encode(password)
+                nickname.isNotBlank() -> it.nickname = nickname
+                email.isNotBlank() -> it.email = email
+                phone.isNotBlank() -> it.phone = phone
+                isEnable != null -> it.enable = isEnable
+                isLock != null -> it.lock = isLock
+            }
         }
     }
 
