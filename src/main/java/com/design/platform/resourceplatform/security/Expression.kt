@@ -1,19 +1,59 @@
 package com.design.platform.resourceplatform.security
 
-import com.design.platform.resourceplatform.entities.Account
-import com.design.platform.resourceplatform.entities.Admin
-import com.design.platform.resourceplatform.entities.User
-import org.springframework.security.core.annotation.AuthenticationPrincipal
+import com.design.platform.resourceplatform.entities.*
+import com.design.platform.resourceplatform.repositories.FileRepository
+import com.design.platform.resourceplatform.repositories.ResourceRepository
+import com.design.platform.resourceplatform.repositories.UserRepository
+import org.springframework.stereotype.Component
 
-class Expression {
+@Component
+class Expression(
+    val users: UserRepository,
+    val resources: ResourceRepository,
+    val files: FileRepository
+) {
 
-    fun isAdmin(@AuthenticationPrincipal account: Account): Boolean {
-        println(account)
+    fun isAdmin(account: Account): Boolean {
         return account is Admin
     }
 
-    fun isUser(@AuthenticationPrincipal account: Account): Boolean {
-        println(account)
+    fun isAdminMaster(account: Account): Boolean {
+        return account is Admin
+    }
+
+    fun isUser(account: Account): Boolean {
         return account is User
+    }
+
+    fun isUserMaster(account: Account, id: Int): Boolean {
+        return when (account) {
+            is Admin -> false
+            else -> {
+                val target = users.getOne(id)
+                account.id == target.id
+            }
+        }
+    }
+
+    fun isUserMasterResource(account: Account, id: Int): Boolean {
+        return when (account) {
+            is Admin -> false
+            else -> {
+                val user = account as User
+                val target = resources.getOne(id)
+                user.resources.contains(target)
+            }
+        }
+    }
+
+    fun isUserMasterFile(account: Account, id: Int): Boolean {
+        return when (account) {
+            is Admin -> false
+            else -> {
+                val user = account as User
+                val target = files.getOne(id)
+                user.files.contains(target)
+            }
+        }
     }
 }
