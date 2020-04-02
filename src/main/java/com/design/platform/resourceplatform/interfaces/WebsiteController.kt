@@ -13,6 +13,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 import java.nio.file.Files
@@ -50,7 +51,7 @@ class WebsiteController(
         return master
     }
 
-    @GetMapping("/api/authenticate")
+    @PostMapping("/api/authenticate")
     fun authenticate(
         @Validated @RequestBody auth: Authenticator
     ): String {
