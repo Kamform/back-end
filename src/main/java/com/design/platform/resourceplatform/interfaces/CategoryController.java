@@ -10,6 +10,7 @@ import com.design.platform.resourceplatform.transfer.ResourceBooth;
 import com.design.platform.resourceplatform.utils.PageHolder;
 import com.design.platform.resourceplatform.utils.PageParam;
 import com.design.platform.resourceplatform.utils.PageUtilsKt;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 //      GET /                   种类列表       开放权限
@@ -36,31 +37,37 @@ public class CategoryController {
     // ===============================================
 
     @GetMapping
+    @PreAuthorize("permitAll()")
     public PageHolder<CategoryBooth> GetCategoryList(PageParam param) {
         return service.GetCategoryBoothList(PageUtilsKt.getAuto(param));
     }
 
     @GetMapping("/{id}/resources")
+    @PreAuthorize("permitAll()")
     public PageHolder<ResourceBooth> GetResourceListByCategory(@PathVariable int id, PageParam param) {
         return service.GetCategoryResourceBoothList(id, PageUtilsKt.getAuto(param));
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("expression.isAdmin(principal)")
     public CategoryBooth GetCategory(@PathVariable int id) {
         return service.GetCategoryBooth(id);
     }
 
     @PostMapping
+    @PreAuthorize("expression.isAdmin(principal)")
     public void UpdateCategory(@RequestBody CategoryRecorder recorder) {
         service.UpdateCategory(recorder);
     }
 
     @PutMapping
+    @PreAuthorize("expression.isAdmin(principal)")
     public void CreateCategory(@RequestBody CategoryDefiner definer) {
         service.CreateCategory(definer);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("expression.isAdmin(principal)")
     public void DeleteCategory(@PathVariable int id) {
         service.DeleteCategory(id);
     }

@@ -10,7 +10,7 @@ import com.design.platform.resourceplatform.repositories.ResourceRepository;
 import com.design.platform.resourceplatform.repositories.UserRepository;
 import com.design.platform.resourceplatform.services.ResourceService;
 import com.design.platform.resourceplatform.transfer.*;
-import com.design.platform.resourceplatform.transfer.patch.Favor;
+import com.design.platform.resourceplatform.transfer.patch.Patch;
 import com.design.platform.resourceplatform.utils.PageHolder;
 import com.design.platform.resourceplatform.utils.PageHolderKt;
 import org.springframework.data.domain.PageRequest;
@@ -101,9 +101,9 @@ public class ResourceServiceImpl implements ResourceService {
     // ===============================================
 
     @Override
-    public void FavoriteResource(User master,  Favor favor) {
-        if (favor.getCancel()) master.favorites.add(GetResource(favor.getResource()));
-        else master.favorites.remove(GetResource(favor.getResource()));
+    public void FavoriteResource(User master, Patch patch) {
+        if (patch.getCancel()) master.favorites.add(GetResource(patch.getTarget()));
+        else master.favorites.remove(GetResource(patch.getTarget()));
         users.save(master);
     }
 }

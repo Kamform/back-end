@@ -9,11 +9,9 @@ import com.design.platform.resourceplatform.repositories.ResourceRepository
 import com.design.platform.resourceplatform.repositories.UserRepository
 import com.design.platform.resourceplatform.transfer.UserDefiner
 import com.design.platform.resourceplatform.transfer.UserRecorder
-import com.design.platform.resourceplatform.transfer.patch.Favor
-import com.design.platform.resourceplatform.transfer.patch.Follow
+import com.design.platform.resourceplatform.transfer.patch.Patch
 import com.design.platform.resourceplatform.utils.PageHolder
 import com.design.platform.resourceplatform.utils.auto
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
 
@@ -72,10 +70,10 @@ class UserService(
 
     // Methods patch
     // ===============================================
-    fun follow(master: User, follow: Follow) {
-        when (follow.cancel) {
-            true -> master.idols.remove(findOne(follow.target))
-            false -> master.idols.add(findOne(follow.target))
+    fun follow(master: User, patch: Patch) {
+        when (patch.cancel) {
+            true -> master.idols.remove(findOne(patch.target))
+            false -> master.idols.add(findOne(patch.target))
         }
         repo.save(master)
     }

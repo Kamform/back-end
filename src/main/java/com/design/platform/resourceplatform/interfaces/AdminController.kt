@@ -18,8 +18,7 @@ import javax.validation.ValidationException
 @RestController
 @RequestMapping("/api/admin")
 open class AdminController(
-    val expression: Expression,
-    val service: AdminService
+    open val service: AdminService
 ) {
 
     // Methods GET

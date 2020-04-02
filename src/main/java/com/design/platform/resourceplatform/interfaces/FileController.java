@@ -11,6 +11,7 @@ import com.design.platform.resourceplatform.utils.PageParam;
 import com.design.platform.resourceplatform.utils.PageUtilsKt;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -42,21 +43,25 @@ public class FileController {
     // ===============================================
 
     @GetMapping
+    @PreAuthorize("expression.isAdmin(principal)")
     public PageHolder<FileBooth> GetFileList(PageParam param) {
         return service.GetFileBoothList(PageUtilsKt.getAuto(param));
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("permitAll()")
     public FileBooth GetFile(@PathVariable int id) {
         return service.GetFileBooth(id);
     }
 
     @GetMapping("/{id}/contained-by")
+    @PreAuthorize("permitAll()")
     public PageHolder<ResourceBooth> GetFileContainedList(@PathVariable int id, PageParam param) {
         return service.GetFileContainedByBoothList(id, PageUtilsKt.getAuto(param));
     }
 
     @GetMapping(value = "/{id}/download", consumes = "*/*")
+    @PreAuthorize("permitAll()")
     public Resource DownloadFile(@PathVariable int id, HttpServletResponse response) {
         HttpHeaders headers = new HttpHeaders();
         File file = service.GetFile(id);
@@ -66,11 +71,13 @@ public class FileController {
     }
 
     @PutMapping
+    @PreAuthorize("expression.isUser(principal)")
     public void UploadFile(@RequestPart FileDefiner definer, @RequestPart MultipartFile file) {
         service.UploadFile(definer, file);
     }
 
     @DeleteMapping
+    @PreAuthorize("expression.isUserMasterFile(principal,id)")
     public void DeleteFile(@RequestBody int id) {
         service.DestroyFile(id);
     }
