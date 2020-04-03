@@ -5,6 +5,7 @@ import com.auth0.jwt.algorithms.Algorithm
 import com.design.platform.resourceplatform.entities.Account
 import com.design.platform.resourceplatform.entities.Admin
 import com.design.platform.resourceplatform.entities.User
+import com.design.platform.resourceplatform.mappers.auto
 import com.design.platform.resourceplatform.repositories.UserRepository
 import com.design.platform.resourceplatform.services.AccountService
 import com.design.platform.resourceplatform.services.AdminService
@@ -52,9 +53,13 @@ class WebsiteController(
         return "Created and done"
     }
 
-    @GetMapping("/test")
-    fun test(@AuthenticationPrincipal master: Account): Account {
-        return master
+    @GetMapping("/api/master")
+    fun test(@AuthenticationPrincipal master: Account): Any {
+        return when (master) {
+            is Admin -> master.auto
+            is User -> master.auto()
+            else -> master
+        }
     }
 
     @PostMapping("/api/authenticate")
