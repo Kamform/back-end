@@ -13,20 +13,21 @@ class Expression(
     val files: FileRepository
 ) {
 
-    fun isAdmin(account: Account): Boolean {
+    fun isAdmin(account: Account?): Boolean {
         return account is Admin
     }
 
-    fun isAdminMaster(account: Account): Boolean {
+    fun isAdminMaster(account: Account?): Boolean {
         return account is Admin
     }
 
-    fun isUser(account: Account): Boolean {
+    fun isUser(account: Account?): Boolean {
         return account is User
     }
 
-    fun isUserMaster(account: Account, id: Int): Boolean {
+    fun isUserMaster(account: Account?, id: Int): Boolean {
         return when (account) {
+            null -> false
             is Admin -> false
             else -> {
                 val target = users.getOne(id)

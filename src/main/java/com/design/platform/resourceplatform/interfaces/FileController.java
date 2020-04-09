@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 
 //      GET /                   文件列表     无权限
 //      GET /{id}               单个文件信息 开放权限
-//      GET /{id}/contained-by 文件包含于   开放权限
+//      GET /{id}/contained-by  文件包含于   开放权限
 //      GET /{id}/download      下载文件     开放权限
 //      PUT /                   上传新文件   用户权限
 //      DELETE /                删除文件     主人权限
